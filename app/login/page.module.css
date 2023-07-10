@@ -1,0 +1,115 @@
+*{
+  font-family: 'Roboto', sans-serif;
+  }
+  
+  body{
+    background-color: #F3F6FC;
+  }
+  .center{
+    margin: auto;
+    margin-top: 100px;
+    height: 100%;
+    width: 50%;
+    color: black;
+    border-radius: 5px;
+  }
+  #sme{
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+  }
+  #txt{
+    padding-left: 20px;
+    width: 100%;
+    height: 40px;
+    border: 1px solid;
+    border-radius: 5px;
+  }
+  #email{
+  padding-left: 20px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 5px;
+  }
+  #password{
+  padding-left: 20px;
+  width: 100%;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 5px;
+  }
+  .forget{
+    margin-top: 30px;
+  }
+  #input{
+    border: none;
+    border-radius: 10px;
+  }
+  .btnsn{
+    border-radius: 10px;
+    padding: 0 80px;
+  }
+  #header{
+    width: 60%;
+  }
+  .home{
+    height: 75.8vh;
+  }
+  @media screen and (max-width: 900px) {
+    .center{
+      margin: auto;
+      margin-top: 10px;
+      height: 100%;
+      width: 70%;
+      color: black;
+      border-radius: 5px;
+    }
+  }
+  @media screen and (max-width: 700px) {
+    .btnlg{
+      padding: 0 50px;
+    }
+  }
+  @media screen and (max-width: 550px) {
+    
+  .center{
+    margin: auto;
+    margin-top: 10px;
+    height: 100%;
+    width: 80%;
+    color: black;
+    border-radius: 5px;
+  }
+  }
+  @media screen and (max-width: 450px) {
+    .btnlg{
+      padding: 0 30px;
+    }
+  }
+  @media screen and (max-width: 350px) {
+    .btnlg{
+      padding: 0 18px;
+    }
+    .center{
+      margin: auto;
+      margin-top: 0px;
+      height: 100%;
+      width: 90%;
+      color: black;
+      border-radius: 5px;
+    }
+  }
+  @media screen and (max-width: 350px) {
+   
+    .center{
+      margin: auto;
+      margin-top: 0px;
+      height: 100%;
+      width: 95%;
+      color: black;
+      border-radius: 5px;
+    }
+  }
+  
