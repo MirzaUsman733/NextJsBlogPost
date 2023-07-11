@@ -5,10 +5,8 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
-// import { useParams } from "next/navigation";
 import { useQuery } from "react-query";
 import { firestore } from "../../../firebase";
-// import { auth } from "../../../firebase";
 import { getAuth } from 'firebase/auth';
 import {
   doc,
@@ -24,38 +22,19 @@ import {
   AiOutlineLike,
   AiOutlineComment,
 } from "react-icons/ai";
-// import Spinner from "./Spinner";
 import { MdOutlineAddComment } from "react-icons/md";
 import Spinner from "@/app/Components/Spinner";
 export default function BlogItems({ params, posts }) {
-  // const [user, setUser] = useState(null);
-
-  // useEffect(() => {
-  //   const unsubscribe = auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       setUser(user);
-  //     } else {
-  //       setUser(null);
-  //     }
-  //   });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
-  // console.log(user)
   const postId = params.id;
-  // const [post, setPost] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
   const [commentValue, setCommentValue] = useState("");
   const [comments, setComments] = useState([]);
   const [isActive, setIsActive] = useState();
-  // const navigate = useNavigate();
   const router = useRouter();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    const auth = getAuth(); // Move getAuth() inside useEffect
+    const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
       dispatch(setUser(user));
       if (!user) {
@@ -455,7 +434,6 @@ export default function BlogItems({ params, posts }) {
           </div>
         ) : (
           <Spinner />
-          // <p>loading</p>
         )}
       </div>
     </div>

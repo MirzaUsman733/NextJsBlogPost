@@ -1,11 +1,9 @@
 'use client'
-// import "./UserItem.css";
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { firestore } from "../../firebase";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
-// import { Link } from "react-router-dom";
 import Link from "next/link";
 import { AiOutlineEdit, AiOutlineDelete, AiOutlineLike } from "react-icons/ai";
 import { MdOutlineAddComment, MdReadMore } from "react-icons/md";

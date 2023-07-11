@@ -8,20 +8,14 @@ import { useRouter } from "next/navigation"; // Correct import statement
 import { collection, getDocs } from "firebase/firestore";
 import UserItem from "../Components/UserItem";
 import SecondItem from "../Components/SecondItem";
-// import Spinner from "./Spinner";
 import { getAuth } from "firebase/auth";
-// import UpperItems from "./UpperItems";
-// import UpperFooter from "./UpperFooter";
-// import SocialPlugin from "./SocialPlugin";
-// import Iframe from "./Iframe";
-
 export default function User() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    const auth = getAuth(); // Move getAuth() inside useEffect
+    const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
       dispatch(setUser(user));
       if (!user) {
@@ -31,12 +25,6 @@ export default function User() {
 
     return () => unsubscribe();
   }, [dispatch, router]);
-
-  // if (!user) {
-  //   return null; // or show a loading state
-  // }
-
-  // The rest of your component code...
 
   const { data: blogPosts } = useQuery("blogPosts", fetchBlogPosts);
 
@@ -77,6 +65,6 @@ export default function User() {
       </div>
     );
   } else {
-    return null; // You may consider adding a loading state here
+    return null;
   }
 }

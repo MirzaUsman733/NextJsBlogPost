@@ -34,7 +34,6 @@ export default function RootLayout({ children }) {
       <QueryClientProvider client={queryClient}>
                 <Navbar/>
         <main>
-        {/* {children} */}
       
         <Suspense fallback={<Loading />}>{children}</Suspense>
      
