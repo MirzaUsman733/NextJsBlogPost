@@ -171,7 +171,6 @@ export default function UserItem({ posts, user }) {
       });
     }
   };
-
   const handleUpdateComment = async (index, postId, comment) => {
     const updatedCommentText = prompt(
       "Enter the updated comment:",
@@ -180,25 +179,22 @@ export default function UserItem({ posts, user }) {
     if (updatedCommentText === null || updatedCommentText.trim() === "") {
       return;
     }
-
+  
     try {
       const updatedComment = {
         ...comment,
         text: updatedCommentText,
       };
-
+  
       const updatedComments = comments[index].map((c) =>
         c === comment ? updatedComment : c
       );
       const updatedCommentsState = [...comments];
       updatedCommentsState[index] = updatedComments;
       setComments(updatedCommentsState);
-
+  
       await updateDoc(doc(firestore, "bloging", postId), {
-        comments: arrayUnion(updatedComment),
-      });
-      await updateDoc(doc(firestore, "bloging", postId), {
-        comments: arrayRemove(comment),
+        comments: updatedComments, // Update the entire comments array
       });
     } catch (error) {
       toast(error, {
@@ -213,6 +209,7 @@ export default function UserItem({ posts, user }) {
       });
     }
   };
+  
   const handleLoadMore = () => {
     setVisiblePosts((prevVisiblePosts) => prevVisiblePosts + 10);
   };

@@ -126,6 +126,7 @@ export default function Login() {
   };
   if (!user) {
     dispatch(setUser(null))
+    router.push('/user')
   }
   return (
     <div

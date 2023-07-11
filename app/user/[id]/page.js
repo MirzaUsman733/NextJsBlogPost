@@ -4,7 +4,6 @@ import { setUser } from '../../Redux/authSlice';
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import { useNavigate, useParams } from "react-router-dom";
 import { useRouter } from "next/navigation";
 // import { useParams } from "next/navigation";
 import { useQuery } from "react-query";
@@ -28,7 +27,7 @@ import {
 // import Spinner from "./Spinner";
 import { MdOutlineAddComment } from "react-icons/md";
 import Spinner from "@/app/Components/Spinner";
-export default function BlogItems({params, posts }) {
+export default function BlogItems({ params, posts }) {
   // const [user, setUser] = useState(null);
 
   // useEffect(() => {
@@ -248,7 +247,6 @@ export default function BlogItems({params, posts }) {
       });
     }
   };
-
   const handleUpdateComment = async (comment, postId) => {
     const updatedCommentText = prompt(
       "Enter the updated comment:",
@@ -272,10 +270,7 @@ export default function BlogItems({params, posts }) {
       setComments(updatedCommentsState);
 
       await updateDoc(doc(firestore, "bloging", postId), {
-        comments: arrayUnion(updatedComment),
-      });
-      await updateDoc(doc(firestore, "bloging", postId), {
-        comments: arrayRemove(comment),
+        comments: updatedComments,
       });
     } catch (error) {
       toast(error, {
@@ -290,6 +285,7 @@ export default function BlogItems({params, posts }) {
       });
     }
   };
+
   const handleClick = () => {
     router.push("/user");
     toast("Back to User", {
@@ -397,14 +393,14 @@ export default function BlogItems({params, posts }) {
                     />
                     <button
                       className="btn btn-secondary"
-                      onClick={() => handleAddComment(post.id)}
+                      onClick={handleAddComment}
                     >
                       Add Comment <MdOutlineAddComment size={20} />
                     </button>
                     <h3 className="mt-5 text-success-emphasis">
                       Most Recents...
                     </h3>
-                    {comments && comments.length > 0 && (
+                    {comments && comments.length > 0 ? (
                       <ul className="mt-3">
                         {comments.map((comment, commentIndex) => (
                           <li
@@ -425,7 +421,7 @@ export default function BlogItems({params, posts }) {
                                   }}
                                   className="btn btn-success mx-2"
                                   onClick={() =>
-                                    handleUpdateComment(comment, post.id)
+                                    handleUpdateComment(comment, postId)
                                   }
                                 >
                                   <AiOutlineEdit />
@@ -439,7 +435,7 @@ export default function BlogItems({params, posts }) {
                                     paddingRight: 8,
                                   }}
                                   onClick={() =>
-                                    handleDeleteComment(comment, post.id)
+                                    handleDeleteComment(comment, postId)
                                   }
                                 >
                                   <AiOutlineDelete />
@@ -449,13 +445,14 @@ export default function BlogItems({params, posts }) {
                           </li>
                         ))}
                       </ul>
+                    ) : (
+                      <p>No comments yet.</p>
                     )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          
         ) : (
           <Spinner />
           // <p>loading</p>

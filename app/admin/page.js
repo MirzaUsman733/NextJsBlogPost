@@ -1,17 +1,13 @@
-'use client'
+"use client";
 import React, { useRef } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { firestore } from "../../firebase";
 import { Editor } from "@tinymce/tinymce-react";
 import { addDoc, collection, getDocs } from "@firebase/firestore";
-// import Items from "./Items";
-// import Spinner from "./Spinner";
-// import UpperFooter from "./UpperFooter";
 import { useQuery, useMutation } from "react-query";
 import AdminItems from "../Components/AdminItems";
 export default function Admin() {
-  // const [isLoading, setIsLoading] = useState(false);
   const contentRef = useRef();
   const messageRef = useRef();
   const urlRef = useRef();
@@ -75,7 +71,6 @@ export default function Admin() {
         theme: "dark",
       });
       mutation.mutate(data);
-      
     } else {
       toast("Data Cannot Submit. Check the Length of each input", {
         position: "top-center",
@@ -164,16 +159,14 @@ export default function Admin() {
           Submit
         </button>
       </form>
-      {/* {isLoading ? (
-        <Spinner />
-      ) : ( */}
-      {blogPosts ?
+      {blogPosts && !isLoading ? (
         <AdminItems
           posts={blogPosts}
           style={{ marginTop: 1000, paddingTop: 1000, backgroundColor: "red" }}
-        />: ""}
-      {/* )} */}
-      {/* <UpperFooter /> */}
+        />
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 }
