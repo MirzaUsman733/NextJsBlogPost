@@ -1,13 +1,13 @@
-'use client'
-import { useSelector, useDispatch } from 'react-redux';
-import { setUser } from '../Redux/authSlice';
+"use client";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "../Redux/authSlice";
 import { firestore } from "../../firebase";
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { getAuth, signOut } from 'firebase/auth';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from 'next/navigation';
+import React, { useEffect } from "react";
+import Link from "next/link";
+import { getAuth, signOut } from "firebase/auth";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -27,28 +27,28 @@ export default function Navbar() {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        toast('SignOut Successfully', {
-          position: 'top-right',
+        toast("SignOut Successfully", {
+          position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: 'dark',
+          theme: "dark",
         });
-        router.push('/login');
+        router.push("/login");
       })
       .catch((error) => {
         toast(error, {
-          position: 'top-right',
+          position: "top-right",
           autoClose: 2500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: 'dark',
+          theme: "dark",
         });
       })
       .finally(() => {
@@ -58,7 +58,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div style={{ backgroundColor: '#F8F9FA' }}>
+      <div style={{ backgroundColor: "#F8F9FA" }}>
         <nav className="navbar navbar-expand-lg bg-body-dark py-4">
           <div className="container">
             <Link href="/" className="navbar-brand">
@@ -75,7 +75,10 @@ export default function Navbar() {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0"></ul>
               <div className="d-flex">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -100,27 +103,31 @@ export default function Navbar() {
                         Sign In
                       </Link>
                     </li>
-                  ) : ("")}
-                    
-                      <li className="nav-item mx-2">
-                        <Link
-                          href="/login"
-                          className="nav-link active btn btn-info px-3 rounded-pill"
-                        >
-                          Get Started
-                        </Link>
-                      </li>
-                     {user.uid ? <li className="nav-item ms-2">
-                        <Link
-                          onClick={handleSignout}
-                          href="/login"
-                          className="nav-link active btn btn-danger text-white px-3 rounded-pill"
-                        >
-                          Sign Out
-                        </Link>
-                      </li>: ""}
-                    
-                  
+                  ) : (
+                    ""
+                  )}
+
+                  <li className="nav-item mx-2">
+                    <Link
+                      href="/login"
+                      className="nav-link active btn btn-info px-3 rounded-pill"
+                    >
+                      Get Started
+                    </Link>
+                  </li>
+                  {user.uid ? (
+                    <li className="nav-item ms-2">
+                      <Link
+                        onClick={handleSignout}
+                        href="/login"
+                        className="nav-link active btn btn-danger text-white px-3 rounded-pill"
+                      >
+                        Sign Out
+                      </Link>
+                    </li>
+                  ) : (
+                    ""
+                  )}
                 </ul>
               </div>
             </div>

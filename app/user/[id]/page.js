@@ -63,7 +63,7 @@ export default function BlogItems({ params, posts }) {
 
   const { data: post, isLoading } = useQuery(["post", postId], fetchPostData);
   useEffect(() => {
-    if (user && user.likedPosts && posts) {
+    if (user?.likedPosts && posts) {
       const likedPosts = user.likedPosts || [];
       setIsActive(likedPosts.includes(postId));
     }
@@ -117,7 +117,7 @@ export default function BlogItems({ params, posts }) {
   };
 
   useEffect(() => {
-    if (posts && posts.length > 0) {
+    if (posts?.length > 0) {
       const initialComments = posts.map((post) => post.comments || []);
       setComments(initialComments);
     }
@@ -379,7 +379,7 @@ export default function BlogItems({ params, posts }) {
                     <h3 className="mt-5 text-success-emphasis">
                       Most Recents...
                     </h3>
-                    {comments && comments.length > 0 ? (
+                    {comments?.length > 0 ? (
                       <ul className="mt-3">
                         {comments.map((comment, commentIndex) => (
                           <li
@@ -389,7 +389,7 @@ export default function BlogItems({ params, posts }) {
                           >
                             <span>{comment.authorName}: &nbsp;</span>
                             {comment.text}
-                            {comment.authorId === user.uid && (
+                            {comment.authorId === user.uid(
                               <>
                                 <button
                                   style={{

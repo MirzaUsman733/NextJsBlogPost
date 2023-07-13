@@ -4,21 +4,25 @@ import { setUser } from '../Redux/authSlice';
 import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import { firestore } from "../../firebase";
-import { useRouter } from "next/navigation"; // Correct import statement
+import { useRouter } from "next/navigation";
 import { collection, getDocs } from "firebase/firestore";
 import UserItem from "../Components/UserItem";
 import SecondItem from "../Components/SecondItem";
 import { getAuth } from "firebase/auth";
-export default function User() {
+export default function User()
+{
   const router = useRouter();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     const auth = getAuth();
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = auth.onAuthStateChanged((user) =>
+    {
       dispatch(setUser(user));
-      if (!user) {
+      if (!user)
+      {
         router.push('/login');
       }
     });
@@ -28,7 +32,8 @@ export default function User() {
 
   const { data: blogPosts } = useQuery("blogPosts", fetchBlogPosts);
 
-  async function fetchBlogPosts() {
+  async function fetchBlogPosts()
+  {
     const querySnapshot = await getDocs(collection(firestore, "bloging"));
     const posts = querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -37,10 +42,12 @@ export default function User() {
     return posts;
   }
 
-  if (!user) {
+  if (!user)
+  {
     dispatch(setUser(null))
     router.push('/user')
-  } else if (blogPosts) {
+  } else if (blogPosts)
+  {
     return (
       <div className="container-fluid m-0 pb-0 px-0">
         <h1 className="text-center my-4">Blog Posts Website</h1>
@@ -64,7 +71,8 @@ export default function User() {
         </div>
       </div>
     );
-  } else {
+  } else
+  {
     return null;
   }
 }

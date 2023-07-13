@@ -5,14 +5,17 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-export default function AdminLogin() {
+export default function AdminLogin()
+{
   const router = useRouter();
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
-  const submitHandler = () => {
-    if (!values.email || !values.password) {
+  const submitHandler = () =>
+  {
+    if (!values.email || !values.password)
+    {
       toast("Please fill all input fiels", {
         position: "top-right",
         autoClose: 2500,
@@ -24,13 +27,16 @@ export default function AdminLogin() {
         theme: "dark",
       });
       return;
-    } else {
+    } else
+    {
       if (
         values.email === "mirzausman9006@gmail.com" &&
         values.password === "mirza786"
-      ) {
+      )
+      {
         router.push("/admin");
-      } else {
+      } else
+      {
         toast("Your email or password is incorrect", {
           position: "top-right",
           autoClose: 2500,
