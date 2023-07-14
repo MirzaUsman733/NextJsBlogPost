@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../Redux/authSlice';
 import { firestore } from "../../firebase";

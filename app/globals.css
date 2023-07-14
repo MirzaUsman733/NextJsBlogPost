@@ -173,15 +173,6 @@ main{
   .divBtn{
     width: 50%;
   }
-  /* .center{ */
-    /* margin: auto; */
-    /* margin: 0px;
-    margin-top: 100px;
-    height: 100%;
-    width: 100%;
-    color: black;
-    border-radius: 5px;
-  } */
 }
 @media screen and (max-width: 425px) {
   .divHome{

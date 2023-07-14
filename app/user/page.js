@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { collection, getDocs } from "firebase/firestore";
 import UserItem from "../Components/UserItem";
 import SecondItem from "../Components/SecondItem";
-// import Spinner from "./Spinner";
 import { getAuth } from "firebase/auth";
 export default function User() 
 {
@@ -29,13 +28,7 @@ export default function User()
 
     return () => unsubscribe();
   }, [dispatch, router]);
-
-  // if (!user) {
-  //   return null; // or show a loading state
-  // }
-
-  // The rest of your component code...
-
+  
   const { data: blogPosts } = useQuery("blogPosts", fetchBlogPosts);
 
   async function fetchBlogPosts()

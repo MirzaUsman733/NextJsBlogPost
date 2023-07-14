@@ -3,17 +3,14 @@ import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { firestore } from "../../firebase";
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
-// import { Link } from "react-router-dom";
+import { doc, updateDoc } from "firebase/firestore";
 import Link from "next/link";
 import { AiOutlineEdit, AiOutlineDelete, AiOutlineLike } from "react-icons/ai";
 import { MdOutlineAddComment, MdReadMore } from "react-icons/md";
 import { likePost } from "../api/LikePost";
 import { addComment } from "../api/CommentAdd";
 import { deleteComment } from "../api/CommentDelete";
-// Remove the import for updateComment since we'll be using handleUpdateComment
-// import { updateComment } from "../api/CommentUpdate";
-import { handleUpdateComment } from "../api/CommentUpdate"; // Import handleUpdateComment
+import { handleUpdateComment } from "../api/CommentUpdate";
 
 export default function UserItem({ posts, user }) {
   const [commentValue, setCommentValue] = useState("");
@@ -62,7 +59,6 @@ export default function UserItem({ posts, user }) {
     }
 
     try {
-      // Call the likePost function
       await likePost(user, isActive, index, postId, setIsActive);
     } catch (error) {
       toast(error, {
@@ -86,21 +82,12 @@ export default function UserItem({ posts, user }) {
   };
 
   const handleAddComment = async (index, postId) => {
-    // Call the addComment function
     await addComment(user, comments, setComments, commentValue, setCommentValue, index, postId);
   };
 
   const handleDeleteComment = async (index, postId, comment) => {
-    // Call the deleteComment function
     await deleteComment(comments, setComments, index, postId, comment);
   };
-
-  // Update the existing handleUpdateComment function with the imported handleUpdateComment
-  // const handleUpdate = async (index, postId) => {
-  //   // await handleUpdateComment(index, postId, comments, setComments, selectedCommentIndex, updatedCommentText, setSelectedCommentIndex, setUpdatedCommentText);
-  //   // await handleUpdateComment(postId, commentId, updatedCommentText, comments, setComments);
-  //   await handleUpdateComment(index, postId, comment, comments, setComments);
-  // };
 
   const handleUpdateComment = async (index, postId, comment) => {
     const updatedCommentText = prompt(
@@ -125,7 +112,7 @@ export default function UserItem({ posts, user }) {
       setComments(updatedCommentsState);
   
       await updateDoc(doc(firestore, "bloging", postId), {
-        comments: updatedComments, // Update the entire comments array
+        comments: updatedComments,
       });
     } catch (error) {
       toast(error, {
@@ -140,10 +127,6 @@ export default function UserItem({ posts, user }) {
       });
     }
   };
-  // const handleCancelUpdate = () => {
-  //   setSelectedCommentIndex(-1);
-  //   setUpdatedCommentText("");
-  // };
 
   const handleLoadMore = () => {
     setVisiblePosts((prevVisiblePosts) => prevVisiblePosts + 10);

@@ -27,7 +27,7 @@ export const handleUpdateComment = async (index, postId, comment, comments, setC
     setComments(updatedCommentsState);
 
     await updateDoc(doc(firestore, "bloging", postId), {
-      comments: updatedComments, // Update the entire comments array
+      comments: updatedComments,
     });
   } catch (error)
   {

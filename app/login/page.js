@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../Redux/authSlice';
-// import 'page.module.css'
 import { getAuth } from "firebase/auth";
 import Input from "../Components/Input";
 import Link from "next/link";
@@ -20,7 +19,7 @@ export default function Login() {
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    const auth = getAuth(); // Move getAuth() inside useEffect
+    const auth = getAuth();
     const unsubscribe = auth.onAuthStateChanged((user) => {
       dispatch(setUser(user));
       if (user) {
