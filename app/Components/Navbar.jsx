@@ -1,6 +1,6 @@
-"use client";
-import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../Redux/authSlice";
+"use client"
+import { useSelector, useDispatch } from 'react-redux';
+import { setUser } from '../Redux/authSlice';
 import { firestore } from "../../firebase";
 import React, { useEffect } from "react";
 import Link from "next/link";

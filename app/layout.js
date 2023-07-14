@@ -33,7 +33,7 @@ export default function RootLayout({ children })
       <body suppressHydrationWarning={true} style={{ backgroundColor: '#F3F6FC' }}>
         <Provider store={store}>
           <QueryClientProvider client={queryClient}>
-            <Navbar />
+            <Navbar/>
             <main>
 
               <Suspense fallback={<Loading />}>{children}</Suspense>

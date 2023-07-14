@@ -1,3 +1,5 @@
+// import React from "react";
+// import "./UserItem.css";
 export default function SecondItem({ posts }) {
   return (
     <>
