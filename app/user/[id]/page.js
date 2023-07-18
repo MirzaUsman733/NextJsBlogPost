@@ -8,9 +8,12 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from 'react-query';
 import { firestore } from '../../../firebase';
 import { getAuth } from 'firebase/auth';
+<<<<<<< HEAD
 import { likePost } from '../../api/LikePost';
 import { addComment } from '../../api/CommentAdd';
 import { deleteComment } from '../../api/CommentDelete';
+=======
+>>>>>>> parent of 1e87197 (Add some additional feature)
 import {
   doc,
   getDoc,
@@ -229,7 +232,10 @@ export default function BlogItems({ params, posts }) {
       });
     }
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of 1e87197 (Add some additional feature)
   const handleUpdateComment = async (comment, postId) => {
     const updatedCommentText = prompt(
       'Enter the updated comment:',
@@ -284,7 +290,7 @@ export default function BlogItems({ params, posts }) {
   };
 
   return (
-    <div>
+    <div className="">
       <div className="text-end me-3 mt-3">
         <button
           className="btn btn-danger"
@@ -393,7 +399,7 @@ export default function BlogItems({ params, posts }) {
                           >
                             <span>{comment.authorName}: &nbsp;</span>
                             {comment.text}
-                            {comment.authorId === user.uid && (
+                            {comment.authorId === user.uid(
                               <>
                                 <button
                                   style={{
