@@ -1,19 +1,22 @@
-import { updateDoc, doc } from "firebase/firestore";
-import { toast } from "react-toastify";
+import { updateDoc, doc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
-export const handleUpdateComment = async (index, postId, comment, comments, setComments) =>
-{
+export const handleUpdateComment = async (
+  index,
+  postId,
+  comment,
+  comments,
+  setComments
+) => {
   const updatedCommentText = prompt(
-    "Enter the updated comment:",
+    'Enter the updated comment:',
     comment?.text
   );
-  if (updatedCommentText === null || updatedCommentText.trim() === "")
-  {
+  if (updatedCommentText === null || updatedCommentText.trim() === '') {
     return;
   }
 
-  try
-  {
+  try {
     const updatedComment = {
       ...comment,
       text: updatedCommentText,
@@ -26,20 +29,19 @@ export const handleUpdateComment = async (index, postId, comment, comments, setC
     updatedCommentsState[index] = updatedComments;
     setComments(updatedCommentsState);
 
-    await updateDoc(doc(firestore, "bloging", postId), {
+    await updateDoc(doc(firestore, 'bloging', postId), {
       comments: updatedComments,
     });
-  } catch (error)
-  {
+  } catch (error) {
     toast(error, {
-      position: "top-right",
+      position: 'top-right',
       autoClose: 2500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "dark",
+      theme: 'dark',
     });
   }
 };

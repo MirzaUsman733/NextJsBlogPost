@@ -1,5 +1,4 @@
-export default function Spinner()
-{
+export default function Spinner() {
   return (
     <div>
       <div className="d-flex justify-content-center">
@@ -8,5 +7,5 @@ export default function Spinner()
         </div>
       </div>
     </div>
-  )
+  );
 }

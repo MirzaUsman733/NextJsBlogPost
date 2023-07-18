@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function Items(props) {
   const { title, description, posts, ref = [] } = props;
@@ -14,7 +14,7 @@ export default function Items(props) {
             const { title, message, url } = post;
             return (
               <li
-                style={{ listStyleType: "none" }}
+                style={{ listStyleType: 'none' }}
                 key={index}
                 className="col-12 col-md-4 col-lg-4 my-3"
               >

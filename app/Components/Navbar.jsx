@@ -1,13 +1,13 @@
-"use client";
+'use client';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../Redux/authSlice';
-import { firestore } from "../../firebase";
-import React, { useEffect } from "react";
-import Link from "next/link";
-import { getAuth, signOut } from "firebase/auth";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/navigation";
+import { firestore } from '../../firebase';
+import React, { useEffect } from 'react';
+import Link from 'next/link';
+import { getAuth, signOut } from 'firebase/auth';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -27,28 +27,28 @@ export default function Navbar() {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        toast("SignOut Successfully", {
-          position: "top-right",
+        toast('SignOut Successfully', {
+          position: 'top-right',
           autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
         });
-        router.push("/login");
+        router.push('/login');
       })
       .catch((error) => {
         toast(error, {
-          position: "top-right",
+          position: 'top-right',
           autoClose: 2500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
         });
       })
       .finally(() => {
@@ -58,7 +58,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div style={{ backgroundColor: "#F8F9FA" }}>
+      <div style={{ backgroundColor: '#F8F9FA' }}>
         <nav className="navbar navbar-expand-lg bg-body-dark py-4">
           <div className="container">
             <Link href="/" className="navbar-brand">
@@ -104,7 +104,7 @@ export default function Navbar() {
                       </Link>
                     </li>
                   ) : (
-                    ""
+                    ''
                   )}
 
                   <li className="nav-item mx-2">
@@ -126,7 +126,7 @@ export default function Navbar() {
                       </Link>
                     </li>
                   ) : (
-                    ""
+                    ''
                   )}
                 </ul>
               </div>

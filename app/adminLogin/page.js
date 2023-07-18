@@ -1,51 +1,45 @@
-"use client";
-import React, { useState } from "react";
-import Input from "../Components/Input";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-export default function AdminLogin()
-{
+'use client';
+import React, { useState } from 'react';
+import Input from '../Components/Input';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+export default function AdminLogin() {
   const router = useRouter();
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  const submitHandler = () =>
-  {
-    if (!values.email || !values.password)
-    {
-      toast("Please fill all input fiels", {
-        position: "top-right",
+  const submitHandler = () => {
+    if (!values.email || !values.password) {
+      toast('Please fill all input fiels', {
+        position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
       return;
-    } else
-    {
+    } else {
       if (
-        values.email === "mirzausman9006@gmail.com" &&
-        values.password === "mirza786"
-      )
-      {
-        router.push("/admin");
-      } else
-      {
-        toast("Your email or password is incorrect", {
-          position: "top-right",
+        values.email === 'mirzausman9006@gmail.com' &&
+        values.password === 'mirza786'
+      ) {
+        router.push('/admin');
+      } else {
+        toast('Your email or password is incorrect', {
+          position: 'top-right',
           autoClose: 2500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
         });
       }
     }
@@ -54,7 +48,7 @@ export default function AdminLogin()
     <div
       id="center"
       className="center text-dark text-center my-5"
-      style={{ backgroundColor: "white" }}
+      style={{ backgroundColor: 'white' }}
     >
       <div id="sme">
         <header id="header">
@@ -78,7 +72,7 @@ export default function AdminLogin()
               setValues((prev) => ({ ...prev, password: event.target.value }))
             }
           />
-          <p className="text-end forget" style={{ cursor: "pointer" }}>
+          <p className="text-end forget" style={{ cursor: 'pointer' }}>
             Forget Password
           </p>
           <button
@@ -88,7 +82,7 @@ export default function AdminLogin()
             Login
           </button>
           <p>
-            Create the account?{" "}
+            Create the account?{' '}
             <span>
               <Link href="/signup">Signup</Link>
             </span>

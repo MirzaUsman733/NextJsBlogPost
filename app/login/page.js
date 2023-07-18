@@ -1,18 +1,18 @@
-"use client";
-import React, { useState,useEffect } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+'use client';
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../Redux/authSlice';
-import { getAuth } from "firebase/auth";
-import Input from "../Components/Input";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { auth } from "../../firebase";
+import { getAuth } from 'firebase/auth';
+import Input from '../Components/Input';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { auth } from '../../firebase';
 import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
-} from "firebase/auth";
+} from 'firebase/auth';
 export default function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -30,21 +30,21 @@ export default function Login() {
     return () => unsubscribe();
   }, [dispatch, router]);
   const [values, setValues] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const [buttonDisable, setButtonDisable] = useState(false);
   const handleForgotPassword = () => {
     if (!values.email) {
-      toast("Please enter your email", {
-        position: "top-right",
+      toast('Please enter your email', {
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
       return;
     }
@@ -54,42 +54,42 @@ export default function Login() {
     sendPasswordResetEmail(auth, values.email)
       .then(() => {
         setButtonDisable(false);
-        toast("Password reset email sent. Please check your inbox.", {
-          position: "top-right",
+        toast('Password reset email sent. Please check your inbox.', {
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
         });
       })
       .catch((error) => {
         setButtonDisable(false);
         toast(error.message, {
-          position: "top-right",
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
         });
       });
   };
   const submitHandler = () => {
     if (!values.email || !values.password) {
-      toast("Please fill all the input field", {
-        position: "top-right",
+      toast('Please fill all the input field', {
+        position: 'top-right',
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
       return;
     }
@@ -97,41 +97,41 @@ export default function Login() {
     signInWithEmailAndPassword(auth, values.email, values.password)
       .then(() => {
         setButtonDisable(false);
-        toast("You Are Successfully Login as a User", {
-          position: "top-right",
+        toast('You Are Successfully Login as a User', {
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
         });
-        router.push("/user");
+        router.push('/user');
       })
       .catch((err) => {
         setButtonDisable(false);
         toast(err, {
-          position: "top-right",
+          position: 'top-right',
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "dark",
+          theme: 'dark',
         });
       });
   };
   if (!user) {
-    dispatch(setUser(null))
-    router.push('/user')
+    dispatch(setUser(null));
+    router.push('/user');
   }
   return (
     <div
       id="center"
       className="center text-center text-dark my-5"
-      style={{ backgroundColor: "White" }}
+      style={{ backgroundColor: 'White' }}
     >
       <div id="sme">
         <header id="header">
@@ -155,7 +155,11 @@ export default function Login() {
               setValues((prev) => ({ ...prev, password: event.target.value }))
             }
           />
-          <p className="text-end forget" style={{cursor: 'pointer'}} onClick={handleForgotPassword}>
+          <p
+            className="text-end forget"
+            style={{ cursor: 'pointer' }}
+            onClick={handleForgotPassword}
+          >
             Forget Password
           </p>
           <button
@@ -166,7 +170,7 @@ export default function Login() {
             Login
           </button>
           <p>
-            Create the account?{" "}
+            Create the account?{' '}
             <span>
               <Link href="/signup">Signup</Link>
             </span>

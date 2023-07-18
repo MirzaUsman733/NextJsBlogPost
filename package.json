@@ -8,6 +8,10 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prettier": {
+    "singleQuote": true,
+    "tabWidth": 2
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@tinymce/tinymce-react": "^4.3.0",

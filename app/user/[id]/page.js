@@ -1,36 +1,35 @@
-'use client'
+'use client';
 import { useSelector, useDispatch } from 'react-redux';
 import { setUser } from '../../Redux/authSlice';
-import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/navigation";
-import { useQuery } from "react-query";
-import { firestore } from "../../../firebase";
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
+import { useQuery } from 'react-query';
+import { firestore } from '../../../firebase';
 import { getAuth } from 'firebase/auth';
-import { likePost } from "../../api/LikePost";
-import { addComment } from "../../api/CommentAdd";
-import { deleteComment } from "../../api/CommentDelete";
+import { likePost } from '../../api/LikePost';
+import { addComment } from '../../api/CommentAdd';
+import { deleteComment } from '../../api/CommentDelete';
 import {
   doc,
   getDoc,
   updateDoc,
   arrayUnion,
   arrayRemove,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 import {
   AiFillStar,
   AiOutlineEdit,
   AiOutlineDelete,
   AiOutlineLike,
   AiOutlineComment,
-} from "react-icons/ai";
-import { MdOutlineAddComment } from "react-icons/md";
-import Spinner from "@/app/Components/Spinner";
+} from 'react-icons/ai';
+import { MdOutlineAddComment } from 'react-icons/md';
+import Spinner from '@/app/Components/Spinner';
 export default function BlogItems({ params, posts }) {
-
   const postId = params.id;
-  const [commentValue, setCommentValue] = useState("");
+  const [commentValue, setCommentValue] = useState('');
   const [comments, setComments] = useState([]);
   const [isActive, setIsActive] = useState();
   const router = useRouter();
@@ -51,21 +50,21 @@ export default function BlogItems({ params, posts }) {
 
   const fetchPostData = async () => {
     try {
-      const postRef = doc(firestore, "bloging", postId);
+      const postRef = doc(firestore, 'bloging', postId);
       const postDoc = await getDoc(postRef);
       if (postDoc.exists) {
         const postData = postDoc.data();
         setComments(postData.comments || []);
         return postData;
       } else {
-        throw new Error("Post does not exist");
+        throw new Error('Post does not exist');
       }
     } catch (error) {
       throw new Error(error.message);
     }
   };
 
-  const { data: post, isLoading } = useQuery(["post", postId], fetchPostData);
+  const { data: post, isLoading } = useQuery(['post', postId], fetchPostData);
   useEffect(() => {
     if (user?.likedPosts && posts) {
       const likedPosts = user.likedPosts || [];
@@ -74,48 +73,48 @@ export default function BlogItems({ params, posts }) {
   }, [postId, posts, user]);
 
   const likeStyle = {
-    border: "none",
-    display: "inline-block",
-    backgroundColor: "rgba(250, 250, 250, 0.116)",
+    border: 'none',
+    display: 'inline-block',
+    backgroundColor: 'rgba(250, 250, 250, 0.116)',
     marginTop: 10,
   };
 
   const handleButton = async () => {
     if (!user) {
-      toast("Please Sign In to like the post", {
-        position: "top-right",
+      toast('Please Sign In to like the post', {
+        position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
       return;
     }
 
     try {
       if (isActive) {
-        await updateDoc(doc(firestore, "bloging", postId), {
+        await updateDoc(doc(firestore, 'bloging', postId), {
           likes: arrayRemove(user.uid),
         });
       } else {
-        await updateDoc(doc(firestore, "bloging", postId), {
+        await updateDoc(doc(firestore, 'bloging', postId), {
           likes: arrayUnion(user.uid),
         });
       }
       setIsActive((prevState) => !prevState);
     } catch (error) {
       toast(error, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
     }
   };
@@ -128,20 +127,20 @@ export default function BlogItems({ params, posts }) {
   }, [posts]);
 
   const inputStyle = {
-    backgroundColor: "rgba(167, 200, 373, 0.1)",
+    backgroundColor: 'rgba(167, 200, 373, 0.1)',
     width: 200,
     marginTop: 10,
     marginBottom: 10,
     marginRight: 10,
     paddingLeft: 8,
 
-    border: "1px solid rgba(146, 150, 173, 0.5)",
+    border: '1px solid rgba(146, 150, 173, 0.5)',
     borderRadius: 3,
     paddingTop: 6,
     paddingBottom: 7,
   };
   const handleKeyPress = async (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       handleAddComment();
     }
   };
@@ -149,29 +148,29 @@ export default function BlogItems({ params, posts }) {
   const handleAddComment = async () => {
     const comment = commentValue.trim();
     if (!comment) {
-      toast("Please write a comment in the comment box", {
-        position: "top-right",
+      toast('Please write a comment in the comment box', {
+        position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
       return;
     }
 
     if (!user || !user.uid) {
-      toast("User is not available", {
-        position: "top-right",
+      toast('User is not available', {
+        position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
       return;
     }
@@ -188,22 +187,22 @@ export default function BlogItems({ params, posts }) {
       updatedCommentsState = updatedComments;
       setComments(updatedCommentsState);
 
-      await updateDoc(doc(firestore, "bloging", postId), {
+      await updateDoc(doc(firestore, 'bloging', postId), {
         comments: arrayUnion(newComment),
       });
-      toast("Congrats, You enter the comment", {
-        position: "top-right",
+      toast('Congrats, You enter the comment', {
+        position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
-      setCommentValue("");
+      setCommentValue('');
     } catch (error) {
-      console.error("Error adding comment:", error);
+      console.error('Error adding comment:', error);
     }
   };
 
@@ -214,29 +213,29 @@ export default function BlogItems({ params, posts }) {
       updatedCommentsState = updatedComments;
       setComments(updatedCommentsState);
 
-      await updateDoc(doc(firestore, "bloging", postId), {
+      await updateDoc(doc(firestore, 'bloging', postId), {
         comments: arrayRemove(comment),
       });
     } catch (error) {
       toast(error.message, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
     }
   };
-  
+
   const handleUpdateComment = async (comment, postId) => {
     const updatedCommentText = prompt(
-      "Enter the updated comment:",
+      'Enter the updated comment:',
       comment.text
     );
-    if (updatedCommentText === null || updatedCommentText.trim() === "") {
+    if (updatedCommentText === null || updatedCommentText.trim() === '') {
       return;
     }
 
@@ -253,34 +252,34 @@ export default function BlogItems({ params, posts }) {
       updatedCommentsState = updatedComments;
       setComments(updatedCommentsState);
 
-      await updateDoc(doc(firestore, "bloging", postId), {
+      await updateDoc(doc(firestore, 'bloging', postId), {
         comments: updatedComments,
       });
     } catch (error) {
       toast(error, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
     }
   };
 
   const handleClick = () => {
-    router.push("/user");
-    toast("Back to User", {
-      position: "top-right",
+    router.push('/user');
+    toast('Back to User', {
+      position: 'top-right',
       autoClose: 2500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "dark",
+      theme: 'dark',
     });
   };
 
@@ -301,7 +300,7 @@ export default function BlogItems({ params, posts }) {
       <div className="container blgItem mb-5">
         {!isLoading && post ? (
           <div>
-            <AiFillStar className="text-warning" />{" "}
+            <AiFillStar className="text-warning" />{' '}
             <p className="d-inline-block">Member only story</p>
             <h1 className="hd">
               <b>{post.message}</b>
@@ -313,7 +312,7 @@ export default function BlogItems({ params, posts }) {
             <button style={likeStyle}>
               <span
                 style={{
-                  color: isActive ? "#1877f2" : "black",
+                  color: isActive ? '#1877f2' : 'black',
                   opacity: isActive ? 100 : 0.6,
                 }}
                 onClick={() => handleButton(post.id)}
@@ -389,7 +388,7 @@ export default function BlogItems({ params, posts }) {
                         {comments.map((comment, commentIndex) => (
                           <li
                             className="my-3"
-                            style={{ listStyleType: "square" }}
+                            style={{ listStyleType: 'square' }}
                             key={commentIndex}
                           >
                             <span>{comment.authorName}: &nbsp;</span>
@@ -444,7 +443,3 @@ export default function BlogItems({ params, posts }) {
     </div>
   );
 }
-
-
-
-

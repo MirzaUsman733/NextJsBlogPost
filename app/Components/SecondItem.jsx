@@ -3,10 +3,10 @@ export default function SecondItem({ posts }) {
     <>
       <div className="mt-5">
         <ul className="ps-0">
-          <h2 className="">Recently added...</h2>
+          <h2>Recently added...</h2>
           {posts.map((post, index) => (
             <li
-              style={{ listStyleType: "none" }}
+              style={{ listStyleType: 'none' }}
               key={index}
               className="container col-12 py-3 mt-4 py-1 blog"
             >
@@ -20,9 +20,9 @@ export default function SecondItem({ posts }) {
                 <h5>{post.title}</h5>
                 <h6
                   style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    flexWrap: "wrap",
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flexWrap: 'wrap',
                   }}
                 >
                   {post.message}

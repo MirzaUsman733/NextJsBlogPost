@@ -1,49 +1,49 @@
-"use client";
-import React, { useRef } from "react";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { firestore } from "../../firebase";
-import { Editor } from "@tinymce/tinymce-react";
-import { addDoc, collection, getDocs } from "@firebase/firestore";
-import { useQuery, useMutation } from "react-query";
-import AdminItems from "../Components/AdminItems";
+'use client';
+import React, { useRef } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { firestore } from '../../firebase';
+import { Editor } from '@tinymce/tinymce-react';
+import { addDoc, collection, getDocs } from '@firebase/firestore';
+import { useQuery, useMutation } from 'react-query';
+import AdminItems from '../Components/AdminItems';
 export default function Admin() {
   const contentRef = useRef();
   const messageRef = useRef();
   const urlRef = useRef();
   const editorRef = useRef(null);
-  const { data: blogPosts, isLoading } = useQuery("blogPosts", fetchBlogPosts);
+  const { data: blogPosts, isLoading } = useQuery('blogPosts', fetchBlogPosts);
 
-  const messagesRef = collection(firestore, "bloging");
+  const messagesRef = collection(firestore, 'bloging');
   const inputStyle = {
     width: 200,
     marginTop: 10,
     marginBottom: 10,
     paddingLeft: 10,
-    border: "none",
+    border: 'none',
     borderRadius: 3,
     paddingTop: 5,
     paddingBottom: 5,
   };
 
   async function fetchBlogPosts() {
-    const querySnapshot = await getDocs(collection(firestore, "bloging"));
+    const querySnapshot = await getDocs(collection(firestore, 'bloging'));
     const posts = querySnapshot.docs.map((doc) => doc.data());
     return posts;
   }
   const mutation = useMutation((data) => addDoc(messagesRef, data), {
     onSuccess: () => {
-      contentRef.current.value = "";
-      messageRef.current.value = "";
-      urlRef.current.value = "";
-      editorRef.current.setContent("");
+      contentRef.current.value = '';
+      messageRef.current.value = '';
+      urlRef.current.value = '';
+      editorRef.current.setContent('');
       fetchBlogPosts();
     },
   });
 
-  const dayjs = require("dayjs");
+  const dayjs = require('dayjs');
   const currentDate = dayjs();
-  const formattedDate = currentDate.format("MMMM D, YYYY h:mm A");
+  const formattedDate = currentDate.format('MMMM D, YYYY h:mm A');
   const submithandler = async (e) => {
     e.preventDefault();
     let data = {
@@ -60,27 +60,27 @@ export default function Admin() {
       data.url &&
       data.txt.length > 20
     ) {
-      toast("Data Submitted", {
-        position: "top-right",
+      toast('Data Submitted', {
+        position: 'top-right',
         autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
       mutation.mutate(data);
     } else {
-      toast("Data Cannot Submit. Check the Length of each input", {
-        position: "top-center",
+      toast('Data Cannot Submit. Check the Length of each input', {
+        position: 'top-center',
         autoClose: 1000,
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: 'dark',
       });
     }
   };
@@ -92,7 +92,7 @@ export default function Admin() {
         style={{
           marginLeft: 400,
           marginRight: 400,
-          backgroundColor: "rgba(250, 250, 250, 0.116)",
+          backgroundColor: 'rgba(250, 250, 250, 0.116)',
         }}
         onSubmit={submithandler}
       >
@@ -138,12 +138,12 @@ export default function Admin() {
             height: 500,
             menubar: false,
             toolbar:
-              "undo redo | formatselect | " +
-              "bold italic backcolor | alignleft aligncenter " +
-              "alignright alignjustify | bullist numlist outdent indent | " +
-              "removeformat | help",
+              'undo redo | formatselect | ' +
+              'bold italic backcolor | alignleft aligncenter ' +
+              'alignright alignjustify | bullist numlist outdent indent | ' +
+              'removeformat | help',
             content_style:
-              "body { font-family:Helvetica,Arial,sans-serif; font-size:16px }",
+              'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
           }}
         />
         <br />
@@ -157,7 +157,7 @@ export default function Admin() {
       {blogPosts && !isLoading ? (
         <AdminItems
           posts={blogPosts}
-          style={{ marginTop: 1000, paddingTop: 1000, backgroundColor: "red" }}
+          style={{ marginTop: 1000, paddingTop: 1000, backgroundColor: 'red' }}
         />
       ) : (
         <Spinner />

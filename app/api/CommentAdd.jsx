@@ -1,6 +1,6 @@
-import { toast } from "react-toastify";
-import { firestore } from "../../firebase";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { toast } from 'react-toastify';
+import { firestore } from '../../firebase';
+import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
 
 export const addComment = async (
   user,
@@ -10,26 +10,23 @@ export const addComment = async (
   setCommentValue,
   index,
   postId
-) =>
-{
+) => {
   const comment = commentValue.trim();
-  if (!comment)
-  {
-    toast("Please Write the comment in the comment box", {
-      position: "top-right",
+  if (!comment) {
+    toast('Please Write the comment in the comment box', {
+      position: 'top-right',
       autoClose: 2500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "dark",
+      theme: 'dark',
     });
     return;
   }
 
-  try
-  {
+  try {
     const newComment = {
       authorId: user.uid,
       authorName: user.displayName,
@@ -41,22 +38,21 @@ export const addComment = async (
     updatedCommentsState[index] = updatedComments;
     setComments(updatedCommentsState);
 
-    await updateDoc(doc(firestore, "bloging", postId), {
+    await updateDoc(doc(firestore, 'bloging', postId), {
       comments: arrayUnion(newComment),
     });
-    toast("Congrats, You enter the comment", {
-      position: "top-right",
+    toast('Congrats, You enter the comment', {
+      position: 'top-right',
       autoClose: 2500,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
       progress: undefined,
-      theme: "dark",
+      theme: 'dark',
     });
-    setCommentValue("");
-  } catch (error)
-  {
-    console.error("Error adding comment:", error);
+    setCommentValue('');
+  } catch (error) {
+    console.error('Error adding comment:', error);
   }
 };
