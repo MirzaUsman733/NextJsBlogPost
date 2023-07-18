@@ -1,4 +1,5 @@
-export default function Loading() {
+export default function Loading()
+{
   return (
     <div>
       <div className="d-flex justify-content-center p-5">
@@ -7,5 +8,5 @@ export default function Loading() {
         </div>
       </div>
     </div>
-  );
+  )
 }

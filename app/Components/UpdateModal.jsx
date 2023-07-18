@@ -1,19 +1,22 @@
-import { useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 
-const UpdateModal = ({ comment, handleUpdateComment }) => {
+const UpdateModal = ({ comment, handleUpdateComment }) =>
+{
   const [updatedComment, setUpdatedComment] = useState(comment.text);
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
+  {
     setUpdatedComment(e.target.value);
   };
 
-  const handleUpdate = () => {
+  const handleUpdate = () =>
+  {
     handleUpdateComment(updatedComment);
   };
 
   return (
-    <Modal show={true} onHide={() => {}}>
+    <Modal show={true} onHide={() => { }}>
       <Modal.Header closeButton>
         <Modal.Title>Update Comment</Modal.Title>
       </Modal.Header>
@@ -25,7 +28,7 @@ const UpdateModal = ({ comment, handleUpdateComment }) => {
         ></textarea>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={() => {}}>
+        <Button variant="secondary" onClick={() => { }}>
           Cancel
         </Button>
         <Button variant="primary" onClick={handleUpdate}>

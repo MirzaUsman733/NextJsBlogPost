@@ -1,31 +1,31 @@
-'use client';
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import Input from '../Components/Input';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth } from '../../firebase';
+"use client";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import Input from "../Components/Input";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../../firebase";
 export default function Signup() {
   const router = useRouter();
   const [values, setValues] = useState({
-    name: '',
-    email: '',
-    password: '',
+    name: "",
+    email: "",
+    password: "",
   });
   const [buttonDisable, setButtonDisable] = useState(false);
   const submitHandler = () => {
     if (!values.name || !values.email || !values.password) {
-      toast('Please fill the input field', {
-        position: 'top-right',
+      toast("Please fill the input field", {
+        position: "top-right",
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: 'dark',
+        theme: "dark",
       });
       return;
     }
@@ -37,19 +37,19 @@ export default function Signup() {
         await updateProfile(user, {
           displayName: values.name,
         });
-        router.push('/');
+        router.push("/");
       })
       .catch((err) => {
         setButtonDisable(false);
         toast(err, {
-          position: 'top-right',
+          position: "top-right",
           autoClose: 2500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: 'dark',
+          theme: "dark",
         });
         console.log(err);
       });
@@ -57,7 +57,7 @@ export default function Signup() {
   return (
     <div
       className="center text-dark text-center my-5"
-      style={{ backgroundColor: 'white' }}
+      style={{ backgroundColor: "white" }}
     >
       <div id="sme">
         <header id="header">
@@ -100,7 +100,7 @@ export default function Signup() {
             Signup
           </button>
           <p>
-            Already have an account?{' '}
+            Already have an account?{" "}
             <span>
               <Link href="/login">Login</Link>
             </span>
